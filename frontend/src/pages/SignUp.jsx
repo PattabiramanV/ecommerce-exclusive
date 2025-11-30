@@ -1,0 +1,70 @@
+import React from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import signupBanner from "../assets/signup-banner.jpg";
+import { Link } from "react-router-dom";
+
+const SignUp = () => {
+    return (
+        <>
+            <Navbar />
+            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                <div className="grid lg:grid-cols-2 gap-10 items-center">
+                    {/* Visual left side */}
+                    <div className="hidden lg:block">
+                        <img
+                            className="w-full h-[520px] object-cover rounded-md shadow-sm"
+                            alt="shopping visual"
+                            src={signupBanner}
+                        />
+                    </div>
+
+                    {/* Form right side */}
+                    <div className="max-w-md w-full ml-auto">
+                        <h2 className="text-3xl font-semibold">Create an account</h2>
+                        <p className="text-gray-600 mt-2">Enter your details below</p>
+
+                        <form className="mt-8 space-y-5">
+                            <div>
+                                <input
+                                    type="text"
+                                    placeholder="Name"
+                                    className="w-full border-b border-gray-300 py-3 focus:outline-none focus:border-black"
+                                />
+                            </div>
+                            <div>
+                                <input
+                                    type="text"
+                                    placeholder="Email or Phone Number"
+                                    className="w-full border-b border-gray-300 py-3 focus:outline-none focus:border-black"
+                                />
+                            </div>
+                            <div>
+                                <input
+                                    type="password"
+                                    placeholder="Password"
+                                    className="w-full border-b border-gray-300 py-3 focus:outline-none focus:border-black"
+                                />
+                            </div>
+
+                            <button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white rounded-md py-3 font-medium cursor-pointer">Create Account</button>
+
+                            <button type="button" className="w-full border rounded-md py-3 flex items-center justify-center gap-3 hover:bg-gray-50 cursor-pointer">
+                                <img className="w-5 h-5" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" />
+                                <span>Sign up with Google</span>
+                            </button>
+
+                            <p className="text-center text-sm text-gray-600">
+                                Already have account?{' '}
+                                <Link href="#" to="/login" className="text-black font-medium underline-offset-4 hover:underline cursor-pointer">Log in</Link>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </main>
+            <Footer />
+        </>
+    );
+};
+
+export default SignUp;

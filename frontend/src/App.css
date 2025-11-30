@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+/* Global cursor behavior */
+button,
+[role="button"],
+summary,
+.clickable,
+.btn,
+label[for],
+select,
+input[type="checkbox"],
+input[type="radio"] {
+  cursor: pointer;
+}
+
+/* Keep text inputs with text cursor */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+textarea {
+  cursor: text;
+}
