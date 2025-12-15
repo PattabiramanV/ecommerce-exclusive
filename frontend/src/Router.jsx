@@ -12,6 +12,7 @@ import Account from "./pages/Account"
 import Wishlist from "./pages/Wishlist"
 import Cart from "./pages/Cart"
 import Checkout from "./pages/Checkout"
+import ForgotPassword from "./pages/ForgotPassword"
 
 function Router(){
 
@@ -23,6 +24,7 @@ function Router(){
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/sign-up' element={<SignUp/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/forgot-password' element={<ForgotPassword/>}/>
         <Route path='/product' element={<ProductDetail/>}/>
         <Route path='/account' element={<Account/>}/>
         <Route path='/wishlist' element={<Wishlist/>}/>
