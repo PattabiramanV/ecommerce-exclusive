@@ -33,7 +33,7 @@ const SignUp = () => {
       setSubmitting(true);
       const res = await fetch(`/api/signup`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json","Authorization": `Bearer ${localStorage.getItem("token")}` },
         body: JSON.stringify({ name, email, password }),
       });
 

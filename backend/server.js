@@ -4,6 +4,9 @@ import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./db.js";
 import User from "./models/User.js";
+import sendWelcomeEmail from "./utils/sendWelcomeEmail.js";
+import jwt from "jsonwebtoken";
+import auth from "./middleware/auth.js";
 
 dotenv.config();
 
@@ -45,14 +48,15 @@ app.post("/api/login", async (req, res) => {
   if (checkUser.password !== password) {
     return res.status(401).json({ message: "Invalid password" });
   }
-
+  const token = jwt.sign(
+    { userId: checkUser._id, email: checkUser.email }, // payload
+    process.env.JWT_SECRET,                  // secret
+    { expiresIn: process.env.JWT_EXPIRES_IN }
+  );
   // Success response
   return res.status(200).json({
     message: "Login successful",
-    user: {
-      id: checkUser._id,
-      email: checkUser.email
-    }
+    token
   });
 });
 
@@ -78,6 +82,11 @@ app.post("/api/signup", async (req, res) => {
       message: "Signup successful",
       userId: user._id,
     });
+    // Fire-and-forget styled welcome email (does not block response)
+    sendWelcomeEmail({ to: email, name }).catch((err) => {
+      console.error("Welcome email failed:", err?.message || err);
+    });
+    
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }

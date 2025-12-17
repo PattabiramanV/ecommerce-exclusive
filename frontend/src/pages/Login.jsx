@@ -28,14 +28,26 @@ const Login = () => {
     try {
       setSubmitting(true);
       // Using Vite proxy: this becomes http://localhost:5000/api/login in dev
-      const res = await axios.post("/api/login", { email, password });
+      const res = await axios.post(
+        "/api/login",
+         { email, password },
+        { 
+          headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
+      }
+        
+        );
       const data = res.data;
 
       // Example: if backend returns token
       // localStorage.setItem('token', data.token);
 
       toast.success("Logged in successfully!");
-      // navigate("/", { replace: true });
+      if (data.token){
+        localStorage.setItem('token', data.token);
+      }
+      navigate("/", { replace: true });
     } catch (err) {
       const msg = err?.response?.data?.message || err?.message || "Login failed";
       toast.error(msg);
