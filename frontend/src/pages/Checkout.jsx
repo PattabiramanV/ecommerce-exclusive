@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useStore } from "../context/Store";
-
+import axiosInstance from "../api/axios";
+import axios from "axios";
 export default function Checkout() {
   const { cart } = useStore();
   const [form, setForm] = useState({
@@ -26,9 +27,110 @@ export default function Checkout() {
   const shipping = 0;
   const total = subtotal + shipping;
 
-  const placeOrder = (e) => {
+  const placeOrder = async (e) => {
     e.preventDefault();
-    alert("Order placed (demo). Hook this to your backend.");
+
+    if (form.payment === "cod") {
+      alert("Order placed successfully (Cash on Delivery).");
+      // Clear cart or redirect logic here
+      return;
+    }
+
+     // 1️⃣ Ask backend to create an order
+     const orderRes = await axios.post(
+      "/api/payment/create-order",
+      { amount: total },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    
+
+  // Notify user that order was created in DB
+  alert(orderRes?.data?.message || "Order created in database");
+
+  // 2️⃣ Razorpay options
+  const options = {
+    key: import.meta.env.VITE_RAZORPAY_KEY_ID, // public key
+    amount: orderRes.data.amount, // in paise
+    currency: orderRes.data.currency || "INR",
+    order_id: orderRes.data.razorpayOrderId,
+    name: "My Ecommerce",
+    description: "Order Payment",
+
+    // 3️⃣ Called after payment success
+    handler: function (response) {
+      console.log("Payment response:", response);
+
+      // send this response to backend later
+    },
+  };
+
+  // 4️⃣ Open Razorpay popup
+  const rzp = new window.Razorpay(options);
+  rzp.open();
+
+    // Razorpay Flow
+    // try {
+    //   const { data: orderData } = await axiosInstance.post('/payment/create-order', {
+    //     amount: total
+    //   });
+
+    //   if (!orderData.success) {
+    //     alert("Failed to create order");
+    //     return;
+    //   }
+
+    //   const options = {
+    //     key: "rzp_test_placeholder", // Replace with your actual public key or fetch from backend env
+    //     amount: orderData.order.amount,
+    //     currency: "INR",
+    //     name: "Exclusive E-Commerce",
+    //     description: "Test Transaction",
+    //     image: "https://your-logo-url.com/logo.png",
+    //     order_id: orderData.order.id,
+    //     handler: async function (response) {
+    //       // Verify Payment
+    //       try {
+    //         const { data: verifyData } = await axiosInstance.post('/payment/verify', {
+    //           razorpay_order_id: response.razorpay_order_id,
+    //           razorpay_payment_id: response.razorpay_payment_id,
+    //           razorpay_signature: response.razorpay_signature
+    //         });
+
+    //         if (verifyData.success) {
+    //           alert("Payment Successful! Order Placed.");
+    //           // Redirect to success page or clear cart
+    //         } else {
+    //           alert("Payment Verification Failed.");
+    //         }
+    //       } catch (error) {
+    //         console.error("Verification Error", error);
+    //         alert("Payment Verification Error");
+    //       }
+    //     },
+    //     prefill: {
+    //       name: form.firstName + " " + form.lastName,
+    //       email: form.email,
+    //       contact: form.phone
+    //     },
+    //     theme: {
+    //       color: "#DB4444"
+    //     }
+    //   };
+
+    //   const rzp1 = new window.Razorpay(options);
+    //   rzp1.on('payment.failed', function (response) {
+    //     alert(response.error.description);
+    //   });
+    //   rzp1.open();
+
+    // } catch (error) {
+    //   console.error("Payment Error", error);
+    //   alert("Something went wrong initializing payment.");
+    // }
   };
 
   return (
@@ -147,7 +249,7 @@ export default function Checkout() {
                   checked={form.payment === "card"}
                   onChange={handleChange}
                 />
-                <span>Credit/Debit Card</span>
+                <span>Online Payment (Razorpay)</span>
               </label>
               <label className="flex items-center gap-3">
                 <input
@@ -162,7 +264,7 @@ export default function Checkout() {
             </div>
 
             <button type="submit" className="px-6 py-3 bg-red-500 text-white rounded-md hover:bg-red-600">
-              Place Order
+              {form.payment === 'card' ? 'Pay & Place Order' : 'Place Order'}
             </button>
           </form>
         </section>

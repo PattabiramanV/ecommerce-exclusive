@@ -5,11 +5,26 @@ import signupBanner from "../assets/signup-banner.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react";
-
+import axios from "axios";
+import { GoogleLogin } from "@react-oauth/google";
 const SignUp = () => {
   const [userData, setUserData] = useState({ name: "", email: "", password: "" });
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      const res = await axios.post("/api/google-login", {
+        token: credentialResponse.credential,
+      });
+
+      localStorage.setItem("token", res.data.token);
+      toast.success("Google login successful");
+      navigate("/"); // Navigate to home or dashboard after login
+    } catch (error) {
+      console.error(error);
+      toast.error("Google login failed");
+    }
+  };
 
   async function createAccountFun(e) {
     e.preventDefault();
@@ -33,7 +48,7 @@ const SignUp = () => {
       setSubmitting(true);
       const res = await fetch(`/api/signup`, {
         method: "POST",
-        headers: { "Content-Type": "application/json","Authorization": `Bearer ${localStorage.getItem("token")}` },
+        headers: { "Content-Type": "application/json" }, // Removed Authorization header for signup
         body: JSON.stringify({ name, email, password }),
       });
 
@@ -81,7 +96,7 @@ const SignUp = () => {
                   value={userData.name}
                   onChange={(e) => setUserData({ ...userData, name: e.target.value })}
                   className="w-full border-b border-gray-300 py-3 focus:outline-none focus:border-black"
-                  
+
                 />
               </div>
               <div>
@@ -92,7 +107,7 @@ const SignUp = () => {
                   value={userData.email}
                   onChange={(e) => setUserData({ ...userData, email: e.target.value })}
                   className="w-full border-b border-gray-300 py-3 focus:outline-none focus:border-black"
-                  
+
                 />
               </div>
               <div>
@@ -103,7 +118,7 @@ const SignUp = () => {
                   value={userData.password}
                   onChange={(e) => setUserData({ ...userData, password: e.target.value })}
                   className="w-full border-b border-gray-300 py-3 focus:outline-none focus:border-black"
-                  
+
                 />
               </div>
 
@@ -111,10 +126,12 @@ const SignUp = () => {
                 {submitting ? "Creating..." : "Create Account"}
               </button>
 
-              <button type="button" className="w-full border rounded-md py-3 flex items-center justify-center gap-3 hover:bg-gray-50 cursor-pointer">
-                <img className="w-5 h-5" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" />
-                <span>Sign up with Google</span>
-              </button>
+              <div className="w-full flex justify-center py-3">
+                <GoogleLogin
+                  onSuccess={handleGoogleSuccess}
+                  onError={() => toast.error("Google Sign-In error")}
+                />
+              </div>
 
               <p className="text-center text-sm text-gray-600">
                 Already have account?{" "}

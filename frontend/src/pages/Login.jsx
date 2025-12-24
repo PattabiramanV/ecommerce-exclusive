@@ -3,12 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import signupBanner from "../assets/signup-banner.jpg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import axiosInstance from "../api/axios";
+import { GoogleLogin } from "@react-oauth/google";
+import { BeatLoader } from "react-spinners";
 import axios from "axios";
-
 const Login = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
   const [submitting, setSubmitting] = useState(false);
 
@@ -26,35 +29,61 @@ const Login = () => {
     }
 
     try {
+      setLoading(true);
       setSubmitting(true);
-      // Using Vite proxy: this becomes http://localhost:5000/api/login in dev
-      const res = await axios.post(
-        "/api/login",
-         { email, password },
-        { 
-          headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        }
-      }
-        
-        );
+      console.log("Login request starting...");
+
+      const res = await axiosInstance.post("/login", { email, password });
       const data = res.data;
 
-      // Example: if backend returns token
-      // localStorage.setItem('token', data.token);
+      if (res.status != 200) {
+        toast.error(res.data.message);
+        return;
+      }
 
       toast.success("Logged in successfully!");
-      if (data.token){
+      if (data.token) {
         localStorage.setItem('token', data.token);
       }
       navigate("/", { replace: true });
     } catch (err) {
+      console.error("Login error:", err);
       const msg = err?.response?.data?.message || err?.message || "Login failed";
       toast.error(msg);
     } finally {
       setSubmitting(false);
+      setLoading(false);
+      console.log("Login request finished");
     }
   }
+
+const handleGoogleSuccess = async (credentialResponse) => {
+  try {
+    setLoading(true);
+
+    const res = await axios.post("/api/google-login", {
+      token: credentialResponse.credential,
+    });
+
+    // If we are here → status is 2xx
+    localStorage.setItem("token", res.data.token);
+    toast.success(res.data.message || "Google login successful");
+    navigate("/");
+
+  } catch (error) {
+    console.error(error);
+
+    // Axios error response handling
+    const message =
+      error.response?.data?.message ||
+      "Google login failed";
+
+    toast.error(message);
+
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <>
@@ -102,14 +131,21 @@ const Login = () => {
               <div className="flex items-center justify-between gap-4 pt-3">
                 <button
                   type="submit"
-                  disabled={submitting}
-                  className={`bg-red-500 ${submitting ? "opacity-70" : "hover:bg-red-600"} text-white rounded-md py-3 px-8 font-medium cursor-pointer`}
+                  disabled={loading || submitting}
+                  className={`bg-red-500 ${loading || submitting ? "opacity-70" : "hover:bg-red-600"} text-white rounded-md py-3 px-8 font-medium cursor-pointer flex justify-center items-center gap-2`}
                 >
-                  {submitting ? "Logging in..." : "Log In"}
+                  {loading ? "Logging In..." : "Log In"}
                 </button>
+
                 <Link to="/forgot-password" className="text-red-500 hover:text-red-600 cursor-pointer">
                   Forget Password?
                 </Link>
+              </div>
+              <div className="w-full flex justify-center py-3">
+                <GoogleLogin
+                  onSuccess={handleGoogleSuccess}
+                  onError={() => toast.error("Google Sign-In error")}
+                />
               </div>
             </form>
           </div>
@@ -119,5 +155,4 @@ const Login = () => {
     </>
   );
 };
-
 export default Login;

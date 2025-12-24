@@ -1,0 +1,14 @@
+import Razorpay from "razorpay";
+import dotenv from "dotenv";
+
+// Load environment variables early to avoid undefined keys during import time
+dotenv.config();
+
+const { RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET } = process.env;
+
+const razorpay = new Razorpay({
+  key_id: RAZORPAY_KEY_ID,
+  key_secret: RAZORPAY_KEY_SECRET,
+});
+
+export default razorpay;

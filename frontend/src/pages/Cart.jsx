@@ -97,9 +97,11 @@ export default function Cart() {
                 <span className="font-semibold">${subtotal}</span>
               </div>
             </div>
-            <button className="mt-5 w-full px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
-              Proceed to checkout
-            </button>
+            <Link to="/checkout" className="block mt-5 w-full">
+              <button className="w-full px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
+                Proceed to checkout
+              </button>
+            </Link>
           </div>
         </div>
       </main>
