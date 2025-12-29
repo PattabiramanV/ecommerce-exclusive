@@ -1,0 +1,290 @@
+[
+  {
+    "name": "HAVIT HV-G92 Gamepad",
+    "description": "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
+    "price": 120,
+    "oldPrice": 160,
+    "category": "Gaming",
+    "images": [
+      {
+        "public_id": "gamepad_1",
+        "url": "https://picsum.photos/seed/sale0/600/600"
+      }
+    ],
+    "stock": 50,
+    "rating": 5,
+    "reviewCount": 88,
+    "isNew": false,
+    "discount": 40
+  },
+  {
+    "name": "AK-900 Wired Keyboard",
+    "description": "Mechanical gaming keyboard with RGB backlight.",
+    "price": 960,
+    "oldPrice": 1160,
+    "category": "Electronics",
+    "images": [
+      {
+        "public_id": "keyboard_1",
+        "url": "https://picsum.photos/seed/sale1/600/600"
+      }
+    ],
+    "stock": 35,
+    "rating": 4,
+    "reviewCount": 75,
+    "isNew": false,
+    "discount": 35
+  },
+  {
+    "name": "IPS LCD Gaming Monitor",
+    "description": "IPS LCD Gaming Monitor 27 inch 144Hz.",
+    "price": 370,
+    "oldPrice": 400,
+    "category": "Electronics",
+    "images": [
+      {
+        "public_id": "monitor_1",
+        "url": "https://picsum.photos/seed/sale2/600/600"
+      }
+    ],
+    "stock": 20,
+    "rating": 5,
+    "reviewCount": 99,
+    "isNew": false,
+    "discount": 30
+  },
+  {
+    "name": "S-Series Comfort Chair",
+    "description": "Ergonomic chair for gaming and office work.",
+    "price": 375,
+    "oldPrice": 400,
+    "category": "Home & Lifestyle",
+    "images": [
+      {
+        "public_id": "chair_1",
+        "url": "https://picsum.photos/seed/sale3/600/600"
+      }
+    ],
+    "stock": 15,
+    "rating": 4.5,
+    "reviewCount": 102,
+    "isNew": false,
+    "discount": 25
+  },
+  {
+    "name": "The North Coat",
+    "description": "Stylish winter coat for men.",
+    "price": 260,
+    "oldPrice": 360,
+    "category": "Men's Fashion",
+    "images": [
+      {
+        "public_id": "coat_1",
+        "url": "https://picsum.photos/seed/best0/600/600"
+      }
+    ],
+    "stock": 60,
+    "rating": 5,
+    "reviewCount": 65,
+    "isNew": true,
+    "discount": 0
+  },
+  {
+    "name": "Gucci Duffle Bag",
+    "description": "Luxury duffle bag for travel.",
+    "price": 960,
+    "oldPrice": 1160,
+    "category": "Woman's Fashion",
+    "images": [
+      {
+        "public_id": "bag_1",
+        "url": "https://picsum.photos/seed/best1/600/600"
+      }
+    ],
+    "stock": 10,
+    "rating": 4.5,
+    "reviewCount": 65,
+    "isNew": false,
+    "discount": 0
+  },
+  {
+    "name": "RGB Liquid CPU Cooler",
+    "description": "High performance liquid cooler for gaming PCs.",
+    "price": 160,
+    "oldPrice": 170,
+    "category": "Electronics",
+    "images": [
+      {
+        "public_id": "cooler_1",
+        "url": "https://picsum.photos/seed/best2/600/600"
+      }
+    ],
+    "stock": 45,
+    "rating": 4.5,
+    "reviewCount": 65,
+    "isNew": false,
+    "discount": 0
+  },
+  {
+    "name": "Small BookSelf",
+    "description": "Wooden bookshelf for small spaces.",
+    "price": 360,
+    "oldPrice": null,
+    "category": "Home & Lifestyle",
+    "images": [
+      {
+        "public_id": "shelf_1",
+        "url": "https://picsum.photos/seed/best3/600/600"
+      }
+    ],
+    "stock": 25,
+    "rating": 5,
+    "reviewCount": 65,
+    "isNew": false,
+    "discount": 0
+  },
+  {
+    "name": "Breed Dry Dog Food",
+    "description": "Nutritious food for adult dogs.",
+    "price": 100,
+    "oldPrice": null,
+    "category": "Groceries & Pets",
+    "images": [
+      {
+        "public_id": "dogfood_1",
+        "url": "https://picsum.photos/seed/prod0/600/600"
+      }
+    ],
+    "stock": 100,
+    "rating": 3,
+    "reviewCount": 35,
+    "isNew": false,
+    "discount": 0
+  },
+  {
+    "name": "CANON EOS DSLR Camera",
+    "description": "High quality DSLR camera for professionals.",
+    "price": 360,
+    "oldPrice": null,
+    "category": "Electronics",
+    "images": [
+      {
+        "public_id": "camera_1",
+        "url": "https://picsum.photos/seed/prod1/600/600"
+      }
+    ],
+    "stock": 12,
+    "rating": 4,
+    "reviewCount": 95,
+    "isNew": false,
+    "discount": 0
+  },
+  {
+    "name": "ASUS FHD Gaming Laptop",
+    "description": "Powerful gaming laptop with latest GPU.",
+    "price": 700,
+    "oldPrice": null,
+    "category": "Computers",
+    "images": [
+      {
+        "public_id": "laptop_1",
+        "url": "https://picsum.photos/seed/prod2/600/600"
+      }
+    ],
+    "stock": 8,
+    "rating": 5,
+    "reviewCount": 325,
+    "isNew": false,
+    "discount": 0
+  },
+  {
+    "name": "Curology Product Set",
+    "description": "Complete skincare set.",
+    "price": 500,
+    "oldPrice": null,
+    "category": "Health & Beauty",
+    "images": [
+      {
+        "public_id": "curology_1",
+        "url": "https://picsum.photos/seed/prod3/600/600"
+      }
+    ],
+    "stock": 50,
+    "rating": 4,
+    "reviewCount": 145,
+    "isNew": false,
+    "discount": 0
+  },
+  {
+    "name": "Kids Electric Car",
+    "description": "Red electric car for kids.",
+    "price": 960,
+    "oldPrice": null,
+    "category": "Baby’s & Toys",
+    "images": [
+      {
+        "public_id": "car_1",
+        "url": "https://picsum.photos/seed/prod4/600/600"
+      }
+    ],
+    "stock": 5,
+    "rating": 5,
+    "reviewCount": 65,
+    "isNew": true,
+    "discount": 0
+  },
+  {
+    "name": "Jr. Zoom Soccer Cleats",
+    "description": "Professional soccer cleats.",
+    "price": 1160,
+    "oldPrice": null,
+    "category": "Sports & Outdoor",
+    "images": [
+      {
+        "public_id": "cleats_1",
+        "url": "https://picsum.photos/seed/prod5/600/600"
+      }
+    ],
+    "stock": 30,
+    "rating": 5,
+    "reviewCount": 35,
+    "isNew": true,
+    "discount": 0
+  },
+  {
+    "name": "GP11 Shooter USB Gamepad",
+    "description": "USB gamepad compatible with PC and Console.",
+    "price": 660,
+    "oldPrice": null,
+    "category": "Gaming",
+    "images": [
+      {
+        "public_id": "gamepad_2",
+        "url": "https://picsum.photos/seed/prod6/600/600"
+      }
+    ],
+    "stock": 55,
+    "rating": 4.5,
+    "reviewCount": 55,
+    "isNew": true,
+    "discount": 0
+  },
+  {
+    "name": "Quilted Satin Jacket",
+    "description": "Comfortable satin jacket.",
+    "price": 660,
+    "oldPrice": null,
+    "category": "Woman's Fashion",
+    "images": [
+      {
+        "public_id": "jacket_1",
+        "url": "https://picsum.photos/seed/prod7/600/600"
+      }
+    ],
+    "stock": 40,
+    "rating": 4.5,
+    "reviewCount": 55,
+    "isNew": false,
+    "discount": 0
+  }
+]
